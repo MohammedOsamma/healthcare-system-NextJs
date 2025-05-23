@@ -9,6 +9,7 @@ import SubmitButton from "./SubmitButton";
 import { useState } from "react";
 import { UserFromValidation } from "@/lib/validation";
 import { useRouter } from "next/navigation";
+import { createUser } from "@/lib/actions/patient.actions";
 
 export enum FromTypeField {
   INPUT = "input",
@@ -42,12 +43,16 @@ const PatientForm = () => {
     setIsLoading(true);
 
     try {
-      // const userData = { name, email, phone };
-      // const user = createUser(userData);
-      // if (user) router.push(`/patients/${user.$id}/register`);
+      const userData = { name, email, phone };
+      const newUser = await createUser(userData);
+      if (newUser) {
+        router.push(`/patients/${newUser.$id}/register`);
+      }
     } catch (error) {
       console.log(error);
     }
+
+    setIsLoading(false);
   }
 
   return (
@@ -69,7 +74,7 @@ const PatientForm = () => {
         <CustomFormField
           fieldType={FromTypeField.INPUT}
           control={form.control}
-          name="eamil"
+          name="email"
           label="Email "
           placeholder="johndee@exmaple.com"
           iconSrc="/assets/icons/email.svg"
