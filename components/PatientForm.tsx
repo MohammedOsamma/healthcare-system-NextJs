@@ -8,7 +8,6 @@ import CustomFormField from "./CustomFormField";
 import SubmitButton from "./SubmitButton";
 import { useState } from "react";
 import { UserFromValidation } from "@/lib/validation";
-import { User } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export enum FromTypeField {
