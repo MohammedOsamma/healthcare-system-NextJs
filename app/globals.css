@@ -443,14 +443,12 @@
 
 .shad-input {
   background-color: #1a1d21 !important;
+  height: 44px !important;
 }
 .shad-input::placeholder {
   color: #76828d !important;
 }
-.shad-input {
-  border: 1px solid #363a3d !important;
-  height: 44px !important;
-}
+
 .shad-input:focus-visible {
   box-shadow: none !important;
   outline: none !important;
