@@ -14,7 +14,10 @@ import { FromTypeField } from "./forms/PatientForm";
 import Image from "next/image";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
-
+import Calendar from "@/public/assets/icons/calendar.svg";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { E164Number } from "libphonenumber-js/core";
 interface CustomProps {
   control: Control<any>;
   fieldType: FromTypeField;
@@ -31,7 +34,15 @@ interface CustomProps {
 }
 
 const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
-  const { fieldType, placeholder, iconSrc, iconAlt } = props;
+  const {
+    fieldType,
+    placeholder,
+    iconSrc,
+    iconAlt,
+    showTimeSelect,
+    dateFormat,
+    renderSkeleton,
+  } = props;
   switch (fieldType) {
     case FromTypeField.INPUT:
       return (
@@ -64,12 +75,36 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
             placeholder={placeholder}
             international
             withCountryCallingCode
-            value={field.value as E164Nmuber | undefined}
+            value={field.value as E164Number | undefined}
             onChange={field.onChange}
             className="input-phone"
           />
         </FormControl>
       );
+    case FromTypeField.DATE_PICKER:
+      return (
+        <div className="flex rounded-md border border-[#363A3D] bg-[#1A1D21]">
+          <Image
+            src={Calendar}
+            alt="calendar"
+            height={24}
+            width={24}
+            className="ml-2"
+          />
+          <FormControl>
+            <DatePicker
+              selected={field.value}
+              onChange={(date) => field.onChange(date)}
+              dateFormat={dateFormat ?? "MM/dd/yyyy"}
+              showTimeSelect={showTimeSelect ?? false}
+              timeInputLabel="Time:"
+              wrapperClassName="date-picker"
+            />
+          </FormControl>
+        </div>
+      );
+    case FromTypeField.SKELETON:
+      return renderSkeleton ? renderSkeleton(field) : null;
     default:
       break;
   }
