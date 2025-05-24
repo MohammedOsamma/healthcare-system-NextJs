@@ -1,12 +1,14 @@
 import Image from "next/image";
+import React from "react";
 import Logo from "@/public/assets/icons/logo-full.svg";
-import onBoarding from "@/public/assets/images/onboarding-img.png";
-import PatientForm from "@/components/forms/PatientForm";
+import RegisterImage from "@/public/assets/images/register-img.png";
 import Link from "next/link";
+import RegisterForm from "@/components/forms/RegisterForm";
+import { getUser } from "@/lib/actions/patient.actions";
+const Register = async ({ params: { userId } }: SearchParamProps) => {
+  const user = await getUser(userId);
 
-export default function Home() {
   return (
-    // Todo OTP Verfication
     <div className="flex h-screen min-h-screen   ">
       <section className="container  remove-scrollbar my-auto">
         <div className="sub-container max-w-[496px]">
@@ -14,10 +16,12 @@ export default function Home() {
             height={1000}
             width={1000}
             src={Logo}
-            alt="patient"
+            alt="carePulse"
             className="mb-12 h-10 w-fit"
           />
-          <PatientForm />
+
+          <RegisterForm user={user} />
+
           <div className="text-14-regular mt-20 flex justify-between">
             <p className="justify-items-end text-[#76828D] xl:text-left">
               ©2025 CarePulse
@@ -28,13 +32,16 @@ export default function Home() {
           </div>
         </div>
       </section>
+
       <Image
-        src={onBoarding}
+        src={RegisterImage}
         alt="patient"
         height={1000}
         width={1000}
-        className="side-img max-w-[50%] rounded-l-2xl"
+        className="side-img max-w-[390px] rounded-l-2xl"
       />
     </div>
   );
-}
+};
+
+export default Register;

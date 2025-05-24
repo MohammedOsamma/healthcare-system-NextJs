@@ -4,24 +4,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Form } from "@/components/ui/form";
-import CustomFormField from "./CustomFormField";
-import SubmitButton from "./SubmitButton";
+import CustomFormField from "../CustomFormField";
+import SubmitButton from "../SubmitButton";
 import { useState } from "react";
 import { UserFromValidation } from "@/lib/validation";
 import { useRouter } from "next/navigation";
 import { createUser } from "@/lib/actions/patient.actions";
+import { FromTypeField } from "./PatientForm";
 
-export enum FromTypeField {
-  INPUT = "input",
-  TEXTAREA = "textarea",
-  PHONE_INPUT = "phoneInput",
-  CHECKBOX = "checkbox",
-  DATE_PICKER = "datePicker",
-  SELECT = "select",
-  SKELETON = "skeleton",
-}
-
-const PatientForm = () => {
+const RegisterForm = ({ user }: { user: User }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   // 1. Define your form.
@@ -57,11 +48,21 @@ const PatientForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 flex-1">
-        <section className="space-y-6 mb-12 ">
-          <h1 className="header">Hi there 👋</h1>
-          <p className="text-[#ABB8C4]">Schedule your frist appointment.</p>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-12 flex-1"
+      >
+        <section className="space-y-4">
+          <h1 className="header">Welcome 👋</h1>
+          <p className="text-[#ABB8C4]">Let us know more about you.</p>
         </section>
+
+        <section className="space-y-6">
+          <div className="mb-9 space-y-1">
+            <h2 className="sub-header">Personal Information</h2>
+          </div>
+        </section>
+
         <CustomFormField
           fieldType={FromTypeField.INPUT}
           control={form.control}
@@ -71,25 +72,10 @@ const PatientForm = () => {
           iconSrc="/assets/icons/user.svg"
           iconAlt="user"
         />
-        <CustomFormField
-          fieldType={FromTypeField.INPUT}
-          control={form.control}
-          name="email"
-          label="Email "
-          placeholder="johndee@exmaple.com"
-          iconSrc="/assets/icons/email.svg"
-          iconAlt="email"
-        />
-        <CustomFormField
-          fieldType={FromTypeField.PHONE_INPUT}
-          control={form.control}
-          name="phone"
-          label="Phone Number"
-          placeholder="(123) 456-7890"
-        />
+
         <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
       </form>
     </Form>
   );
 };
-export default PatientForm;
+export default RegisterForm;
