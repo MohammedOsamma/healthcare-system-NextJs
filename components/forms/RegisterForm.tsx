@@ -53,7 +53,7 @@ const RegisterForm = ({ user }: { user: User }) => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-12 flex-1"
+        className="space-y-10 flex-1"
       >
         <section className="space-y-4">
           <h1 className="header">Welcome 👋</h1>
@@ -132,20 +132,40 @@ const RegisterForm = ({ user }: { user: User }) => {
           <CustomFormField
             fieldType={FromTypeField.INPUT}
             control={form.control}
-            name="email"
-            label="Email "
-            placeholder="johndee@exmaple.com"
-            iconSrc="/assets/icons/email.svg"
-            iconAlt="email"
+            name="address"
+            label="Address"
+            placeholder="14th Street , New York"
+          />
+          <CustomFormField
+            fieldType={FromTypeField.INPUT}
+            control={form.control}
+            name="occupation"
+            label="Occupation"
+            placeholder="Software Engineer"
+          />
+        </div>
+
+        <div className="flex flex-col gap-6 xl:flex-row">
+          <CustomFormField
+            fieldType={FromTypeField.INPUT}
+            control={form.control}
+            name="emergancyContactName"
+            label="Emergancy Contact Name"
+            placeholder="John Dee"
           />
           <CustomFormField
             fieldType={FromTypeField.PHONE_INPUT}
             control={form.control}
-            name="phone"
-            label="Phone Number"
+            name="emergancyContactNumber"
+            label="Emergancy Contact Number"
             placeholder="(123) 456-7890"
           />
         </div>
+        <section className="space-y-6">
+          <div className="mb-9 space-y-1">
+            <h2 className="sub-header">Medical Information</h2>
+          </div>
+        </section>
 
         <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
       </form>
