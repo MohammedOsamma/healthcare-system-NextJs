@@ -501,6 +501,7 @@
 .shad-select-trigger {
   border: 1px solid #363a3d !important;
   height: 44px !important;
+  width: 100%;
 }
 .shad-select-trigger:focus {
   box-shadow: none !important;
