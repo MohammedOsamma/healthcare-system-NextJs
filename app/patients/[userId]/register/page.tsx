@@ -22,14 +22,7 @@ const Register = async ({ params: { userId } }: SearchParamProps) => {
 
           <RegisterForm user={user} />
 
-          <div className="text-14-regular mt-20 flex justify-between">
-            <p className="justify-items-end text-[#76828D] xl:text-left">
-              ©2025 CarePulse
-            </p>
-            <Link className="text-green-500" href="/?admin=true">
-              Amdin
-            </Link>
-          </div>
+          <p className="copyright py-12">©2025 CarePulse</p>
         </div>
       </section>
 
