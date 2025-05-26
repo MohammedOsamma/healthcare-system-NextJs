@@ -19,6 +19,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { E164Number } from "libphonenumber-js/core";
 import { Select, SelectContent, SelectTrigger, SelectValue } from "./ui/select";
+import { Textarea } from "@/components/ui/textarea";
 interface CustomProps {
   control: Control<any>;
   fieldType: FromTypeField;
@@ -68,6 +69,17 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
         </div>
       );
       break;
+    case FromTypeField.TEXTAREA:
+      return (
+        <FormControl>
+          <Textarea
+            placeholder={placeholder}
+            {...field}
+            className="shad-textArea "
+            disabled={props.disabled}
+          />
+        </FormControl>
+      );
     case FromTypeField.PHONE_INPUT:
       return (
         <FormControl>
