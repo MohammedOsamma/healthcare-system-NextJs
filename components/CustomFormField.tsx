@@ -20,6 +20,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import { E164Number } from "libphonenumber-js/core";
 import { Select, SelectContent, SelectTrigger, SelectValue } from "./ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { Label } from "./ui/label";
+import { Checkbox } from "./ui/checkbox";
 interface CustomProps {
   control: Control<any>;
   fieldType: FromTypeField;
@@ -131,6 +133,21 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
               {props.children}
             </SelectContent>
           </Select>
+        </FormControl>
+      );
+    case FromTypeField.CHECKBOX:
+      return (
+        <FormControl>
+          <div className="flex items-center gap-4">
+            <Checkbox
+              id={props.name}
+              checked={field.value}
+              onCheckedChange={field.onChange}
+            />
+            <Label className="checkbox-label" htmlFor={props.name}>
+              {props.label}
+            </Label>
+          </div>
         </FormControl>
       );
     default:

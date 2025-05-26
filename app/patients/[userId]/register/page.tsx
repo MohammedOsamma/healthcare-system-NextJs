@@ -10,8 +10,8 @@ const Register = async ({ params: { userId } }: SearchParamProps) => {
 
   return (
     <div className="flex h-screen min-h-screen   ">
-      <section className="container  remove-scrollbar my-auto">
-        <div className="sub-container max-w-[860px]">
+      <section className="container  remove-scrollbar">
+        <div className="sub-container max-w-[860px] flex-1 flex-col py-15">
           <Image
             height={1000}
             width={1000}
