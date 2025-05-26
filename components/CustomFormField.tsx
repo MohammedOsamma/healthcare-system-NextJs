@@ -118,7 +118,6 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
       );
     case FromTypeField.SKELETON:
       return renderSkeleton ? renderSkeleton(field) : null;
-
     case FromTypeField.SELECT:
       return (
         <FormControl>

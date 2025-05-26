@@ -227,6 +227,23 @@ const RegisterForm = ({ user }: { user: User }) => {
           />
         </div>
 
+        <div className="flex flex-col gap-6 xl:flex-row">
+          <CustomFormField
+            fieldType={FromTypeField.TEXTAREA}
+            control={form.control}
+            name="familyMedicalHistory"
+            label="Family Medical History"
+            placeholder="Father had diabetes, mother had hypertension, etc."
+          />
+          <CustomFormField
+            fieldType={FromTypeField.TEXTAREA}
+            control={form.control}
+            name="pastMedicalHistory"
+            label="Past Medical History"
+            placeholder="Had surgery in 2015, diagnosed with asthma in 2018, etc."
+          />
+        </div>
+
         <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
       </form>
     </Form>
