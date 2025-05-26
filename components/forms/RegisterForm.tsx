@@ -12,10 +12,11 @@ import { useRouter } from "next/navigation";
 import { createUser } from "@/lib/actions/patient.actions";
 import { FromTypeField } from "./PatientForm";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-import { Doctors, GenderOptions } from "@/constents";
+import { Doctors, GenderOptions, IdentificationTypes } from "@/constents";
 import { Label } from "../ui/label";
 import { SelectItem } from "../ui/select";
 import Image from "next/image";
+import FileUploader from "../FileUploader";
 
 const RegisterForm = ({ user }: { user: User }) => {
   const router = useRouter();
@@ -243,6 +244,44 @@ const RegisterForm = ({ user }: { user: User }) => {
             placeholder="Had surgery in 2015, diagnosed with asthma in 2018, etc."
           />
         </div>
+
+        <section className="space-y-6">
+          <div className="mb-9 space-y-1">
+            <h2 className="sub-header">Idetification and Verfication</h2>
+          </div>
+        </section>
+
+        <CustomFormField
+          fieldType={FromTypeField.SELECT}
+          control={form.control}
+          name="identificaitonType"
+          label="Identification Type"
+          placeholder="Select an identification type"
+        >
+          {IdentificationTypes.map((type) => (
+            <SelectItem key={type} value={type}>
+              {type}
+            </SelectItem>
+          ))}
+        </CustomFormField>
+
+        <CustomFormField
+          fieldType={FromTypeField.INPUT}
+          control={form.control}
+          name="identificationNumber"
+          label="Identification Number"
+          placeholder="13546877"
+        />
+
+        <CustomFormField
+          fieldType={FromTypeField.SKELETON}
+          control={form.control}
+          name="identificationDocument"
+          label="Scanned copy of Identification Document"
+          renderSkeleton={(field) => (
+            <FileUploader files={field.value} onChange={field.onChange} />
+          )}
+        />
 
         <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
       </form>
