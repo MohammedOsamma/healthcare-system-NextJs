@@ -1,4 +1,6 @@
-import { ID, Query } from "node-appwrite";
+"use server";
+import { ID, InputFile, Query } from "node-appwrite";
+
 import {
   databases,
   NEXT_PUBLIC_BUCKET_ID,
@@ -10,7 +12,7 @@ import {
   users,
 } from "../appwrite.config";
 import { parseStringify } from "../utils";
-import { InputFile } from "node-appwrite/file";
+
 export const createUser = async (user: CreateUserParams) => {
   try {
     const newuser = await users.create(
