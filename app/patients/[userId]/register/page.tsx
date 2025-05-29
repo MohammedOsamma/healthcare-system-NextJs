@@ -2,7 +2,6 @@ import Image from "next/image";
 import React from "react";
 import Logo from "@/public/assets/icons/logo-full.svg";
 import RegisterImage from "@/public/assets/images/register-img.png";
-import Link from "next/link";
 import RegisterForm from "@/components/forms/RegisterForm";
 import { getUser } from "@/lib/actions/patient.actions";
 const Register = async ({ params: { userId } }: SearchParamProps) => {
