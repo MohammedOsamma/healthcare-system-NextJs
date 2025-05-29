@@ -3,6 +3,7 @@ import Image from "next/image";
 import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import UploadIcon from "@/public/assets/icons/upload.svg";
+import { convertFileToUrl } from "@/lib/utils";
 
 type FileUploaderProps = {
   files: File[] | undefined;
@@ -13,7 +14,7 @@ const FileUploader = ({ files, onChange }: FileUploaderProps) => {
   const onDrop = useCallback((acceptedFiles: File[]) => {
     onChange(acceptedFiles);
   }, []);
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+  const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
   return (
     <div {...getRootProps()} className="file-upload">
