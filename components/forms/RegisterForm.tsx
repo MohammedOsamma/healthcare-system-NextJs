@@ -39,13 +39,14 @@ const RegisterForm = ({ user }: { user: User }) => {
 
   // 2. Define a submit handler.
 
-  async function onSubmit({ values }: z.infer<typeof PatientFormValidation>) {
+  const onSubmit = async (values: z.infer<typeof PatientFormValidation>) => {
     setIsLoading(true);
 
+    // Store file info in form data as
     let formData;
     if (
       values.identificationDocument &&
-      values.identificationDocument.length > 0
+      values.identificationDocument?.length > 0
     ) {
       const blobFile = new Blob([values.identificationDocument[0]], {
         type: values.identificationDocument[0].type,
@@ -55,15 +56,37 @@ const RegisterForm = ({ user }: { user: User }) => {
       formData.append("blobFile", blobFile);
       formData.append("fileName", values.identificationDocument[0].name);
     }
+
     try {
-      const patientData = {
-        ...values,
+      const patient = {
         userId: user.$id,
+        name: values.name,
+        email: values.email,
+        phone: values.phone,
         birthDate: new Date(values.birthDate),
-        identificationDocument: formData,
+        gender: values.gender,
+        address: values.address,
+        occupation: values.occupation,
+        emergencyContactName: values.emergencyContactName,
+        emergencyContactNumber: values.emergencyContactNumber,
+        primaryPhysician: values.primaryPhysician,
+        insuranceProvider: values.insuranceProvider,
+        insurancePolicyNumber: values.insurancePolicyNumber,
+        allergies: values.allergies,
+        currentMedication: values.currentMedication,
+        familyMedicalHistory: values.familyMedicalHistory,
+        pastMedicalHistory: values.pastMedicalHistory,
+        identificationType: values.identificationType,
+        identificationNumber: values.identificationNumber,
+        identificationDocument: values.identificationDocument
+          ? formData
+          : undefined,
+        privacyConsent: values.privacyConsent,
       };
-      const patient = await registerPatient(patientData);
-      if (patient) {
+
+      const newPatient = await registerPatient(patient);
+
+      if (newPatient) {
         router.push(`/patients/${user.$id}/new-appointment`);
       }
     } catch (error) {
@@ -71,7 +94,7 @@ const RegisterForm = ({ user }: { user: User }) => {
     }
 
     setIsLoading(false);
-  }
+  };
 
   return (
     <Form {...form}>
@@ -173,15 +196,15 @@ const RegisterForm = ({ user }: { user: User }) => {
           <CustomFormField
             fieldType={FromTypeField.INPUT}
             control={form.control}
-            name="emergancyContactName"
-            label="Emergancy Contact Name"
+            name="emergencyContactName"
+            label="Emergency Contact Name"
             placeholder="John Dee"
           />
           <CustomFormField
             fieldType={FromTypeField.PHONE_INPUT}
             control={form.control}
-            name="emergancyContactNumber"
-            label="Emergancy Contact Number"
+            name="emergencyContactNumber"
+            label="Emergency Contact Number"
             placeholder="(123) 456-7890"
           />
         </div>

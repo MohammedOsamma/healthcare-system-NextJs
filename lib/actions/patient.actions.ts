@@ -1,6 +1,6 @@
 "use server";
-import { ID, InputFile, Query } from "node-appwrite";
-
+import { ID, Query } from "node-appwrite";
+import { InputFile } from "node-appwrite/file";
 import {
   databases,
   NEXT_PUBLIC_BUCKET_ID,
