@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Logo from "@/public/assets/icons/logo-full.svg";
 import Appointment from "@/public/assets/images/appointment-img.png";
+import AppointmentForm from "@/components/forms/AppointmentForm";
 
 export default function Home() {
   return (
@@ -14,7 +15,8 @@ export default function Home() {
             alt="patient"
             className="mb-12 h-10 w-fit"
           />
-          {/* <PatientForm /> */}
+
+          <AppointmentForm />
 
           <p className="justify-items-end text-[#76828D] xl:text-left">
             ©2025 CarePulse
