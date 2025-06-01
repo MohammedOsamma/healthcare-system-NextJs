@@ -2,8 +2,13 @@ import Image from "next/image";
 import Logo from "@/public/assets/icons/logo-full.svg";
 import Appointment from "@/public/assets/images/appointment-img.png";
 import AppointmentForm from "@/components/forms/AppointmentForm";
+import { getPatients } from "@/lib/actions/patient.actions";
 
-export default function Home() {
+export default async function NewAppointment({
+  params: { userId },
+}: SearchParamProps) {
+  const patient = await getPatients(userId);
+
   return (
     <div className="flex h-screen min-h-screen   ">
       <section className="container  remove-scrollbar my-auto">
@@ -16,7 +21,11 @@ export default function Home() {
             className="mb-12 h-10 w-fit"
           />
 
-          <AppointmentForm />
+          <AppointmentForm
+            type="create"
+            userId={userId}
+            patientId={patient.$id}
+          />
 
           <p className="justify-items-end text-[#76828D] xl:text-left">
             ©2025 CarePulse

@@ -21,7 +21,15 @@ export enum FromTypeField {
   SKELETON = "skeleton",
 }
 
-const AppointmentForm = () => {
+const AppointmentForm = ({
+  type,
+  userId,
+  patientId,
+}: {
+  type: "create" | "cancel";
+  userId?: string;
+  patientId?: string;
+}) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   // 1. Define your form.
