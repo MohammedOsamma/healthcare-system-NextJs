@@ -48,6 +48,7 @@ export const getPatients = async (userId: string) => {
       NEXT_PUBLIC_PATIENTS_COLLECTION_ID!,
       [Query.equal("userId", userId)]
     );
+
     return parseStringify(patients.documents[0]);
   } catch (error: any) {
     console.log(error);

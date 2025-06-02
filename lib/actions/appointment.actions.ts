@@ -1,3 +1,4 @@
+"use server";
 import { ID } from "node-appwrite";
 import {
   databases,
@@ -10,6 +11,7 @@ export const createAppointment = async (
   appointment: CreateAppointmentParams
 ) => {
   try {
+    
     const newAppointment = await databases.createDocument(
       NEXT_PUBLIC_DATABASE_ID!,
       NEXT_PUBLIC_APPOINTMENTS_COLLECTION_ID!,

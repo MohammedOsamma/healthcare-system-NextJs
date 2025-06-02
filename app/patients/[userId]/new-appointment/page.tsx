@@ -4,9 +4,8 @@ import Appointment from "@/public/assets/images/appointment-img.png";
 import AppointmentForm from "@/components/forms/AppointmentForm";
 import { getPatients } from "@/lib/actions/patient.actions";
 
-export default async function NewAppointment({
-  params: { userId },
-}: SearchParamProps) {
+const NewAppointment = async ({ params }: SearchParamProps) => {
+  const { userId } = await params;
   const patient = await getPatients(userId);
 
   return (
@@ -22,8 +21,8 @@ export default async function NewAppointment({
           />
 
           <AppointmentForm
-            patientId={patient?.$id}
             userId={userId}
+            patientId={patient?.$id}
             type="create"
           />
 
@@ -39,4 +38,6 @@ export default async function NewAppointment({
       />
     </div>
   );
-}
+};
+
+export default NewAppointment;
