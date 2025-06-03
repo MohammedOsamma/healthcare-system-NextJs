@@ -3,11 +3,13 @@ import Logo from "@/public/assets/icons/logo-full.svg";
 import onBoarding from "@/public/assets/images/onboarding-img.png";
 import PatientForm from "@/components/forms/PatientForm";
 import Link from "next/link";
+import PassKeyModal from "@/components/PassKeyModal";
 
-export default function Home() {
+export default function Home({ searchParams }: SearchParamProps) {
+  const isAdmin = searchParams.admin === "true";
   return (
-    // Todo OTP Verfication
     <div className="flex h-screen min-h-screen   ">
+      {isAdmin && <PassKeyModal />}
       <section className="container  remove-scrollbar my-auto">
         <div className="sub-container max-w-[496px]">
           <Image
