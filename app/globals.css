@@ -1,6 +1,18 @@
 @import "tailwindcss";
 
 /* ========================================== TAILWIND STYLES */
+
+/* Backgrounds Images  */
+
+.bg-appointments {
+  background-image: url("/assets/images/appointments-bg.png");
+}
+.bg-pending {
+  background-image: url("/assets/images/pending-bg.png");
+}
+.bg-cancelled {
+  background-image: url("/assets/images/cancelled-bg.png");
+}
 @layer base {
   /* Remove scrollbar */
   .remove-scrollbar::-webkit-scrollbar {
