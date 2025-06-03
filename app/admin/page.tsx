@@ -5,7 +5,9 @@ import StatCard from "@/components/StatCard";
 import AppointmentIcon from "@/public/assets/icons/appointments.svg";
 import PendingIcon from "@/public/assets/icons/pending.svg";
 import CancelIcon from "@/public/assets/icons/cancelled.svg";
-const Admin = () => {
+import { getRecentAppointmentList } from "@/lib/actions/appointment.actions";
+const Admin = async () => {
+  const appointments = await getRecentAppointmentList();
   return (
     <div className="mx-auto flex max-w-7xl flex-col space-y-14">
       <header className="admin-header">
@@ -30,19 +32,19 @@ const Admin = () => {
         <section className="admin-stat">
           <StatCard
             type="appointments"
-            count={5}
+            count={appointments.scheduledCount}
             label="Schedule appointments"
             icon={AppointmentIcon}
           />
           <StatCard
             type="pending"
-            count={10}
+            count={appointments.pendingCount}
             label="Pending Appointments"
             icon={PendingIcon}
           />
           <StatCard
             type="cancelled"
-            count={2}
+            count={appointments.cancelledCount}
             label="Cancelled Appointments"
             icon={CancelIcon}
           />
