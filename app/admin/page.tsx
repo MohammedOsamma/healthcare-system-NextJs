@@ -6,6 +6,9 @@ import AppointmentIcon from "@/public/assets/icons/appointments.svg";
 import PendingIcon from "@/public/assets/icons/pending.svg";
 import CancelIcon from "@/public/assets/icons/cancelled.svg";
 import { getRecentAppointmentList } from "@/lib/actions/appointment.actions";
+import { DataTable } from "@/components/DataTable";
+import { columns } from "@/components/table/columns";
+
 const Admin = async () => {
   const appointments = await getRecentAppointmentList();
   return (
@@ -49,6 +52,7 @@ const Admin = async () => {
             icon={CancelIcon}
           />
         </section>
+        <DataTable columns={columns} data={appointments.documents} />
       </main>
     </div>
   );
