@@ -43,7 +43,6 @@ const AppointmentForm = ({
 }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  console.log(appointment);
 
   const AppointmentFormValidation = getAppointmentSchema(type);
   // 1. Define your form.
@@ -54,12 +53,13 @@ const AppointmentForm = ({
       schedule: appointment ? new Date(appointment.schedule) : new Date(),
       reason: appointment ? appointment.resason : "",
       note: appointment ? appointment.note : "",
-      cancellationReason: appointment ? appointment.cancellationReason : "",
+      cancellationReason: appointment?.cancellationReason || "",
     },
   });
 
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof AppointmentFormValidation>) {
+    console.log("Iam Submitting");
     setIsLoading(true);
 
     let status;
@@ -100,10 +100,12 @@ const AppointmentForm = ({
           userId,
           appointmentId: appointment?.$id,
           appointment: {
-            primaryPhysician: appointment?.primaryPhysician,
+            primaryPhysician: values?.primaryPhysician,
             schedule: new Date(values?.schedule),
             status: status as Status,
-            cancellationReason: values?.cancellationReason,
+            cancellationReason: values.cancellationReason,
+            reason: values.reason,
+            note: values.note,
           },
           type,
         };
@@ -111,7 +113,7 @@ const AppointmentForm = ({
         const updatedAppointment = await updateAppointment(appointmentToUpdate);
 
         if (updatedAppointment) {
-          if (setOpen) setOpen(false);
+          setOpen && setOpen(false);
           form.reset();
         }
       }
@@ -130,8 +132,11 @@ const AppointmentForm = ({
       break;
     case "cancel":
       buttonLabel = "Cancel Appointment";
+      break;
     case "schedule":
       buttonLabel = "Schedule Appointment";
+      break;
+
     default:
       break;
   }
@@ -202,7 +207,7 @@ const AppointmentForm = ({
           <CustomFormField
             fieldType={FromTypeField.TEXTAREA}
             control={form.control}
-            name="reason"
+            name="cancellationReason"
             label="Reason for cancellation"
             placeholder="Enter reason for cancellation"
           />
