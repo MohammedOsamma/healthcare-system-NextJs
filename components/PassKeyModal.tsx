@@ -30,7 +30,7 @@ const PassKeyModal = () => {
     typeof window !== "undefined"
       ? window.localStorage.getItem("accessKey")
       : null;
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
   useEffect(() => {
     const accessKey = encryptedKey && decryptKey(encryptedKey);
     if (path) {
@@ -41,7 +41,7 @@ const PassKeyModal = () => {
         setOpen(true);
       }
     }
-  }, [encryptedKey]);
+  }, [encryptedKey, path, router]);
   const validatePasskey = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {

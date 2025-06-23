@@ -1,6 +1,5 @@
 import type { NextConfig } from "next";
-
-export const nextConfig: NextConfig = {
+const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -8,3 +7,5 @@ export const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
 };
+
+export default nextConfig;
